@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
+body {
+  font-family: sans-serif;
+  margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.container {
   color: white;
+  text-align: center;
+  max-width: 768px;
+  margin: auto;
+  border: #414a4c solid 3px;
+  border-radius: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background: #232b2b;
+  position: fixed;
+  padding-top: 80px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.box {
+  background: #414a4c;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.list {
+  grid-column: 2 / span 2;
+}
+
+.playing {
+  padding-left: 80px;
+  padding-right: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.logo {
+  float: left;
+  height: 100px;
+  margin: auto;
+}
+
+.list {
+  margin: auto;
+}
+
+.list p {
+  text-align: left;
+  bottom: 0;
+  margin: 5px;
+}
+
+.playing button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn {
+  float: right;
+  margin: auto;
+}
+
+.btn img {
+  margin-left: 3px;
+}
+
+.album {
+  font-size: 20px;
+  font-weight: bold;
+}
+.playing button {
+  width: 50px;
+  height: 50px;
+  border-radius: 40px;
+  opacity: 0.7;
+  margin: auto;
+  cursor: pointer;
+}
+
+.playlist-song {
+  height: 300px;
+  margin: 10px 20px 20px 20px;
+}
+
+.head {
+  text-align: left;
+  justify-content: space-between;
+  display: flex;
+  font-size: 14px;
+  border-bottom: #414a4c solid 2px;
+  opacity: 0.7;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.head p {
+  margin: 10px 0px 10px 0px;
+}
+.playlist-container {
+  padding-top: 15px;
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+}
+
+.song-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.song-list p {
+  margin: 0;
+}
+.song-list:hover {
+  background-color: #353839;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item1 {
+  text-align: left;
+}
+
+.item2 {
+  align-self: center;
+  text-align: right;
+  justify-content: center;
+}
+
+.item2 button {
+  margin-right: 20px;
+  opacity: 0.7;
+  border-radius: 10px;
+  height: 25px;
+}
+.songs {
+  font-size: 16px;
+}
+
+.artist {
+  font-size: 14px;
+  opacity: 0.7;
 }
