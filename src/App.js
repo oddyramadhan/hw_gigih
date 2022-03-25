@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Albums from "./components/Albums";
 
 function Playlist() {
   const [data, setData] = useState({});
@@ -25,55 +26,10 @@ function Playlist() {
   if (data.album === undefined) {
     return <h2>Loading..</h2>;
   }
-  const time = new Date(data.duration_ms);
+
   return (
     <div className="wrapper">
-      <div className="container">
-        <div className="box">
-          <div className="playing">
-            <img
-              className="logo"
-              alt="album-photo"
-              src={data.album.images[0].url}
-            />
-            <div className="list">
-              <p>{data.album.type}</p>
-              <p className="album">{data.album.name}</p>
-              <p>{data.album.artists[0].name}</p>
-            </div>
-            <div className="btn">
-              <button>
-                <img
-                  src="play.logo.png"
-                  height="20px"
-                  width="30px"
-                  alt="play"
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="playlist-song">
-          <div className="head">
-            <p>TITLE</p>
-            <p>DURATION</p>
-          </div>
-          <div className="playlist-container">
-            <div className="song-list">
-              <div className="item1">
-                <p className="songs">{data.name}</p>
-                <p className="artist">{data.album.artists[0].name}</p>
-              </div>
-              <div className="item2">
-                <p>
-                  <button>Select</button>
-                  {time.getMinutes()}:{time.getSeconds()}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Albums data={data} />
     </div>
   );
 }

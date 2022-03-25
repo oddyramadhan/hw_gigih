@@ -121,7 +121,6 @@ body {
 .song-list:hover {
   background-color: #353839;
   border-radius: 5px;
-  cursor: pointer;
 }
 
 .item1 {
@@ -139,6 +138,7 @@ body {
   opacity: 0.7;
   border-radius: 10px;
   height: 25px;
+  cursor: pointer;
 }
 .songs {
   font-size: 16px;
