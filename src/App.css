@@ -3,13 +3,21 @@ body {
   margin: 0 auto;
 }
 
+.kotak {
+  padding: 80px 50px 80px 50px;
+  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .container {
   color: white;
   text-align: center;
   max-width: 768px;
-  margin: auto;
+  /* margin: auto; */
   border: #414a4c solid 3px;
   border-radius: 10px;
+  margin-bottom: 25px;
 }
 
 .wrapper {
@@ -17,11 +25,12 @@ body {
   height: 100vh;
   background: #232b2b;
   position: fixed;
-  padding-top: 80px;
+  overflow: auto;
 }
 
 .box {
   background: #414a4c;
+  height: 170px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-bottom-left-radius: 10px;
@@ -30,29 +39,29 @@ body {
 
 .list {
   grid-column: 2 / span 2;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin: auto;
+  margin-left: 0px;
 }
 
 .playing {
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 50px;
+  padding-right: 50px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .logo {
   float: left;
-  height: 100px;
-  margin: auto;
-}
-
-.list {
+  height: 130px;
   margin: auto;
 }
 
 .list p {
   text-align: left;
   bottom: 0;
-  margin: 5px;
+  margin: 7px;
 }
 
 .playing button:hover {
@@ -68,8 +77,13 @@ body {
   margin-left: 3px;
 }
 
-.album {
-  font-size: 20px;
+.album-type {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+}
+.name {
+  font-size: 24px;
   font-weight: bold;
 }
 .playing button {
