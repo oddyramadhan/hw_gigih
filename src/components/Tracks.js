@@ -7,7 +7,7 @@ function Tracks({ data }) {
       <div className="song-list">
         <div className="item1">
           <p className="songs">{data.name}</p>
-          <p className="artist">{data.album.artists[0].name}</p>
+          <p className="artist">{data.album?.artists[0].name}</p>
         </div>
         <div className="item2">
           <p>
