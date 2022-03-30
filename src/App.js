@@ -45,7 +45,7 @@ function Playlist() {
           const response = await fetch(
             `https://api.spotify.com/v1/search?q=${name}&type=album`, {
               headers: {
-                Authorization: `Bearer BQA6sNZn4VPNZwoY2ErjtyUYNzP3FuWQYjnU3OcAyVZX1nYbUwEUqh3co6IPc9Bt_9igybYiJy5LAVjiFfvMgi7V3SJxD1t2UkichlfViwnC8tyhdZt68PykeSPmTpgJBn6amHhWGrn8RVAHu8tIYW9iBwNNzEViT70tQixhV7Jt3tOoeBo`
+                Authorization: `Bearer ${token}`
               },
               params: {
                 q:"queen",
