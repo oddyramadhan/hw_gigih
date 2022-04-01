@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 import Albums from "./components/Albums";
 import { Route, Routes } from "react-router-dom";
-import WebApp from "./pages/home/implicit_grant/App";
+import WebApp from "./pages/implicit_grant/App";
 
 function Playlist() {
   // const [data, setData] = useState({});
@@ -29,52 +28,11 @@ function Playlist() {
   //   return <h2>Loading..</h2>;
   // }
 
-  const [token, setToken] = useState("");
-  const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setToken(localStorage.getItem("accessToken"));
-    }
-  }, []);
-
-  useEffect(() => {
-      const getDataAndRender = async () => {
-        try {
-          const response = await fetch(
-            `https://api.spotify.com/v1/search?q=${name}&type=album`, {
-              headers: {
-                Authorization: `Bearer ${token}`
-              },
-              params: {
-                q:"queen",
-                type:"album"
-              }
-            }
-          );
-          if (!response.ok) throw new Error("Error");
-          const results = await response.json();
-          console.log("using async", results);
-          setData(results);
-        } 
-        catch (error) {
-          console.log(error);
-        }
-      };
-      getDataAndRender();
-    }, [name]);
-
   return (
     <div className="wrapper">
-      <form  >
-      <input type="text" onChange={(e) => setName(e.target.value)}/>
-      <button type={"submit"}>Search</button>
-      </form>
       <Routes>
-        <Route path="/login" element={<WebApp/>} />
-        <Route path="/playlist" element={<Albums  />}>
-        </Route>
+        <Route path="/" element={<WebApp />} />
+        <Route path="/dashboard" element={<Albums />}></Route>
       </Routes>
     </div>
   );

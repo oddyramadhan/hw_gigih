@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import Playlist from "../../../App";
-// import SpotifyGetPlaylists from "./components/SpotifyGetPlaylists/SpotifyGetPlaylists";
-// import "./WebApp.css";
+import Albums from "../../components/Albums";
+import "./App.css";
 
 const CLIENT_ID = "d8aaffad66dc46989595aa50b3414ea2"; // insert your client id here from spotify
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/playlist";
+const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/dashboard";
 const SCOPES = "playlist-modify-private";
 
 /* 
@@ -43,10 +42,9 @@ const WebApp = () => {
   };
 
   return (
-    <div className="container">
-      <h1>hi</h1>
-      <button onClick={handleLogin}>login to spotify</button>
-      <Playlist />
+    <div className="container-login">
+      <h1>Silahkan Login Untuk Melanjutkan</h1>
+      <button onClick={handleLogin}>Login to spotify</button>
     </div>
   );
 };
