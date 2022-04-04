@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Albums from "../../components/Albums";
 import "./App.css";
 
 const CLIENT_ID = "d8aaffad66dc46989595aa50b3414ea2"; // insert your client id here from spotify
