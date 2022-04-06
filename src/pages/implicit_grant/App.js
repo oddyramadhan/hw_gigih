@@ -6,7 +6,7 @@ const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/dashboard";
 const SCOPES = "playlist-modify-private";
 
-/* 
+/*
 http://localhost:3000/webapp#access_token=ABCqxL4Y&token_type=Bearer&expires_in=3600
 */
 const getReturnedParamsFromSpotifyAuth = (hash) => {

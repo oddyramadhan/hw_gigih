@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./CreatePlaylist.css";
-
-function CreatePlaylist({ token }) {
+import { useSelector } from "react-redux";
+function CreatePlaylist() {
+  const token = useSelector((state) => state.token);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -9,7 +10,7 @@ function CreatePlaylist({ token }) {
     e.preventDefault();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Authorization", `Bearer ` + token);
 
     var raw = JSON.stringify({
       name: `${title}`,

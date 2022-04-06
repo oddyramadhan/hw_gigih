@@ -3,18 +3,20 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import CreatePlaylist from "../pages/CreatePlaylist";
+import { useSelector } from "react-redux";
 
 function Albums() {
+  const token = useSelector((state) => state.token);
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [selected, setSelected] = useState([]);
-
-  const [token] = useState(
-    window.location.hash
-      .substring(1, window.location.hash.length - 1)
-      .split("&")[0]
-      .split("=")[1]
-  );
+  console.log(token);
+  // const [token] = useState(
+  //   window.location.hash
+  //     .substring(1, window.location.hash.length - 1)
+  //     .split("&")[0]
+  //     .split("=")[1]
+  // );
 
   const handleSelect = (uri) => {
     setSelected([...selected, uri]);
@@ -25,7 +27,7 @@ function Albums() {
   };
 
   useEffect(() => {
-    console.log(selected);
+    console.log("Selected", selected);
   }, [selected]);
 
   const getDataAndRender = async (e) => {
@@ -40,7 +42,7 @@ function Albums() {
     ).then((response) => response.json());
 
     setData(data.tracks.items);
-    console.log(data);
+    console.log("Fetch data", data);
   };
   return (
     <div className="kotak">
