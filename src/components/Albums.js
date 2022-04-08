@@ -10,7 +10,7 @@ function Albums() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [selected, setSelected] = useState([]);
-  console.log(token);
+
   // const [token] = useState(
   //   window.location.hash
   //     .substring(1, window.location.hash.length - 1)

@@ -1,13 +1,9 @@
-import "./App.css";
 import Albums from "./components/Albums";
-import { Route, Routes, Navigate } from "react-router-dom";
 import WebApp from "./pages/implicit_grant/App";
-import CreatePlaylist from "./pages/CreatePlaylist";
 import { connect } from "react-redux";
 import { Component } from "react";
-import Auth from "./Auth";
 
-class App extends Component {
+class Auth extends Component {
   componentDidMount() {
     const hash = window.location.hash
       .substring(1)
@@ -30,22 +26,11 @@ class App extends Component {
       return true;
     }
   };
-
   render() {
     return (
       <div className="wrapper">
-        {/* <Auth /> */}
-        {/* {this.isValidToken() ? (
-          <Navigate replace to="/dashboard" token={this.props.token} />
-        ) : (
-          <Navigate replace to="/login" />
-        )} */}
-        <Routes>
-          <Route path="/login" element={<WebApp />} />
-          <Route path="/dashboard" element={<Albums />} />
-          <Route path="/create-playlist" element={<CreatePlaylist />} />
-          <Route path="*" element={<Navigate replace to="/login" />} />
-        </Routes>
+        <p>Login first..</p>
+        {this.isValidToken() ? <Albums token={this.props.token} /> : <WebApp />}
       </div>
     );
   }
@@ -64,4 +49,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

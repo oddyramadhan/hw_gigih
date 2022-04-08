@@ -33,7 +33,6 @@ function CreatePlaylist() {
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
-  console.log(token);
   return (
     <div className="container-create">
       <div className="kotak-create">
