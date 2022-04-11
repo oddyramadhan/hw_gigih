@@ -1,22 +1,15 @@
 import React from "react";
 // import Tracks from "./Tracks";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
-import CreatePlaylist from "../pages/CreatePlaylist";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
-function Albums() {
+function AddSong() {
   const token = useSelector((state) => state.token.token);
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [selected, setSelected] = useState([]);
-
-  // const [token] = useState(
-  //   window.location.hash
-  //     .substring(1, window.location.hash.length - 1)
-  //     .split("&")[0]
-  //     .split("=")[1]
-  // );
+  const location = useLocation();
 
   const handleSelect = (uri) => {
     setSelected([...selected, uri]);
@@ -29,6 +22,29 @@ function Albums() {
   useEffect(() => {
     console.log("Selected", selected);
   }, [selected]);
+
+  const addItems = () => {
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`);
+
+    var raw = "";
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch(
+      `https://api.spotify.com/v1/playlists/${location.state.data}/tracks?uris=${selected}`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
 
   const getDataAndRender = async (e) => {
     e.preventDefault();
@@ -44,6 +60,7 @@ function Albums() {
     setData(data.tracks.items);
     console.log("Fetch data", data);
   };
+
   return (
     <div className="kotak">
       <div className="search">
@@ -53,16 +70,13 @@ function Albums() {
             placeholder="Search by album/track"
             onChange={(e) => setName(e.target.value)}
           />
-          <button type="submit">Search</button>
+          <button className="submit" type="submit">
+            Search
+          </button>
         </form>
-        <div className="btn-create">
-          <NavLink to="/create-playlist">
-            <button onClick={() => <CreatePlaylist />}>Create Playlist</button>
-          </NavLink>
-          <NavLink to="/myplaylist">
-            <button>My Playlist</button>
-          </NavLink>
-        </div>
+        <button className="selected" onClick={addItems}>
+          Add Selected Items to Playlist
+        </button>
       </div>
       {data &&
         data.map((v, index) => {
@@ -96,7 +110,9 @@ function Albums() {
                       ) : (
                         <button
                           className="btn2"
-                          onClick={() => handleSelect(v.uri)}
+                          onClick={() => {
+                            handleSelect(v.uri);
+                          }}
                         >
                           Select
                         </button>
@@ -105,15 +121,6 @@ function Albums() {
                   </div>
                 </div>
               </div>
-              {/* <div className="playlist-song">
-                <div className="head">
-                  <p>TITLE</p>
-                  <p>DURATION</p>
-                </div>
-                <ol>
-                  <li>{<Tracks data={v} />}</li>
-                </ol>
-              </div> */}
             </div>
           );
         })}
@@ -121,4 +128,4 @@ function Albums() {
   );
 }
 
-export default Albums;
+export default AddSong;

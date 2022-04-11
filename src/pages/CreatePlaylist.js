@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./CreatePlaylist.css";
 import { useSelector } from "react-redux";
+
 function CreatePlaylist() {
-  const token = useSelector((state) => state.token);
+  const token = useSelector((state) => state.token.token);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -51,7 +52,9 @@ function CreatePlaylist() {
               onChange={(e) => setDesc(e.target.value)}
             />
             <br></br>
-            <button type="submit">Submit</button>
+            <button className="submit" type="submit">
+              Submit
+            </button>
           </form>
         </div>
       </div>

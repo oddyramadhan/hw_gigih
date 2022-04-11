@@ -3,7 +3,7 @@ import "./App.css";
 
 const CLIENT_ID = "d8aaffad66dc46989595aa50b3414ea2"; // insert your client id here from spotify
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/dashboard";
+const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/myplaylist";
 const SCOPES = "playlist-modify-private";
 
 /*

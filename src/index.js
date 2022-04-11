@@ -5,16 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore, compose, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
-import musicReducer from "./pages/reducers/musicReducer";
-
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(
-  musicReducer,
-  composeEnhancer(applyMiddleware(thunk))
-);
+import store from "./pages/reducers/store";
 
 ReactDOM.render(
   <Provider store={store}>
