@@ -4,7 +4,7 @@ body {
 }
 
 .kotak {
-  padding: 80px 50px 80px 50px;
+  padding: 50px 50px 20px 50px;
   gap: 2rem;
   /* display: grid;
   grid-template-columns: 1fr 1fr; */
@@ -181,10 +181,10 @@ body {
 }
 
 .search input {
-  height: 25px;
-  width: 200px;
+  height: 30px;
+  width: 400px;
   border-radius: 15px;
-  padding-left: 10px;
+  padding-left: 15px;
 }
 
 .search button {
