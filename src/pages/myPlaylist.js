@@ -9,7 +9,6 @@ function MyPlaylist() {
 
   useEffect(() => {
     const getPlaylist = async () => {
-      //   e.preventDefault();
       const data = await fetch(
         `	https://api.spotify.com/v1/users/oddy.ramadhan-id/playlists`,
         {
@@ -24,17 +23,16 @@ function MyPlaylist() {
     };
     getPlaylist();
   }, []);
-  console.log(token);
+
   return (
     <div className="kotak">
-      <div className="search"></div>
       {data &&
         data.map((v, index) => {
           return (
             <div className="container" key={index}>
               <div className="box">
                 <div className="playing">
-                  <img className="logo" alt="" src={v.images.url} />
+                  <img className="logo" alt="" src={v.images[0]?.url} />
                   <div className="list">
                     <p className="album-type">{v.type}</p>
                     <p className="name">{v.name}</p>

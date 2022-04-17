@@ -3,16 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 export const tokenSlice = createSlice({
   name: "token",
   initialState: {
-    token: localStorage.getItem("accessToken") || "",
+    token: sessionStorage.getItem("accessToken") || "",
     expiredToken: false,
   },
   reducers: {
     setToken: (state, action) => {
-      localStorage.setItem("accessToken", action.payload);
-      state.token = localStorage.getItem("accessToken");
+      sessionStorage.setItem("accessToken", action.payload);
+      state.token = sessionStorage.getItem("accessToken");
     },
     removeToken: (state) => {
-      localStorage.removeItem("accessToken");
+      sessionStorage.removeItem("accessToken");
       state.token = "";
     },
     resetToken: (state, action) => {

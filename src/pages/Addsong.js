@@ -1,5 +1,4 @@
 import React from "react";
-// import Tracks from "./Tracks";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -10,6 +9,7 @@ function AddSong() {
   const [name, setName] = useState("");
   const [selected, setSelected] = useState([]);
   const location = useLocation();
+  const playlistID = location.search.split("=")[1];
 
   const handleSelect = (uri) => {
     setSelected([...selected, uri]);
@@ -29,7 +29,6 @@ function AddSong() {
     myHeaders.append("Authorization", `Bearer ${token}`);
 
     var raw = "";
-
     var requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -37,16 +36,32 @@ function AddSong() {
       redirect: "follow",
     };
 
-    fetch(
-      `https://api.spotify.com/v1/playlists/${location.state.data}/tracks?uris=${selected}`,
-      requestOptions
-    )
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
+    const selectedPost = selected.map((i) =>
+      fetch(
+        `https://api.spotify.com/v1/playlists/${playlistID}/tracks?uris=${i.uri}`,
+        requestOptions
+      )
+    );
+
+    // eslint-disable-next-line no-unused-vars
+    const hasil = Promise.all(selectedPost)
+      .then((res) => {
+        console.log(res);
+        alert("Items added");
+      })
+      .finally(() => setSelected([]));
+    console.log(selectedPost);
+
+    // fetch(
+    //   `https://api.spotify.com/v1/playlists/${location.state.data}/tracks?uris=${selected}`,
+    //   requestOptions
+    // )
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log("error", error));
   };
 
-  const getDataAndRender = async (e) => {
+  const getTracks = async (e) => {
     e.preventDefault();
     const data = await fetch(
       `https://api.spotify.com/v1/search?q=${name}&type=track`,
@@ -64,7 +79,7 @@ function AddSong() {
   return (
     <div className="kotak">
       <div className="search">
-        <form onSubmit={getDataAndRender}>
+        <form onSubmit={getTracks}>
           <input
             type="text"
             placeholder="Search by album/track"
@@ -78,8 +93,8 @@ function AddSong() {
           Add Selected Items to Playlist
         </button>
       </div>
-      {data &&
-        data.map((v, index) => {
+      {selected &&
+        selected.map((v, index) => {
           return (
             <div className="container" key={index}>
               <div className="box">
@@ -100,10 +115,10 @@ function AddSong() {
                       />
                     </button>
                     <div>
-                      {selected.includes(v.uri) ? (
+                      {selected.includes(v) ? (
                         <button
                           className="btn3"
-                          onClick={() => handleDelete(v.uri)}
+                          onClick={() => handleDelete(v)}
                         >
                           Selected
                         </button>
@@ -111,7 +126,7 @@ function AddSong() {
                         <button
                           className="btn2"
                           onClick={() => {
-                            handleSelect(v.uri);
+                            handleSelect(v);
                           }}
                         >
                           Select
@@ -124,6 +139,54 @@ function AddSong() {
             </div>
           );
         })}
+      {data &&
+        data
+          .filter((ura) => !selected.includes(ura))
+          .map((v, index) => {
+            return (
+              <div className="container" key={index}>
+                <div className="box">
+                  <div className="playing">
+                    <img className="logo" alt="" src={v.album.images[0].url} />
+                    <div className="list">
+                      <p className="album-type">{v.type}</p>
+                      <p className="name">{v.name}</p>
+                      <p>{v.artists[0].name}</p>
+                    </div>
+                    <div className="btn">
+                      <button className="btn1">
+                        <img
+                          src="play.logo.png"
+                          height="20px"
+                          width="30px"
+                          alt="play"
+                        />
+                      </button>
+                      <div>
+                        {selected.includes(v.uri) ? (
+                          <button
+                            className="btn3"
+                            onClick={() => handleDelete(v)}
+                          >
+                            Selected
+                          </button>
+                        ) : (
+                          <button
+                            className="btn2"
+                            onClick={() => {
+                              handleSelect(v);
+                            }}
+                          >
+                            Select
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
     </div>
   );
 }
