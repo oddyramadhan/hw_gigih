@@ -29,6 +29,7 @@ function Tracks({ data }) {
       // console.log("Fetch data", res);
     };
     getTracks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function duration(time) {
