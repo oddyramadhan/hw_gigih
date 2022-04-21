@@ -1,69 +1,61 @@
-import React from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import "../components/Cart.css";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { removeToken } from "./reducers/Slicer";
-import { useDispatch } from "react-redux";
-import "./Home.css";
-import CreatePlaylist from "./CreatePlaylist";
-import MyPlaylist from "./myPlaylist";
-import Auth from "./login/App";
-import AddSong from "./Addsong";
-import Search from "../components/Search";
 
 function Home() {
   const token = useSelector((state) => state.token.token);
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
-  const validToken = () => {
-    if (token) {
-      return true;
-    }
-  };
+
+  useEffect(() => {
+    const getRecom = async () => {
+      const data = await fetch(
+        `https://api.spotify.com/v1/browse/new-releases`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      ).then((response) => response.json());
+      // .then((response) => {
+      //   if (typeof response.error === "object") {
+      //     alert("Token anda sudah kadaluarsa, silahkan login kembali");
+      //     dispatch(removeToken());
+      //   }
+      // });
+
+      setData(data.albums.items);
+      console.log("Fetch data", data);
+    };
+    getRecom();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <div className="wrapper">
-      {validToken() ? (
-        <div className="home">
-          <div className="left-container">
-            <NavLink to="/dashboard">
-              <div className="menu-box">
-                <p>Home</p>
+    <div className="kotak">
+      <h1>New Release</h1>
+      <div className="container-item">
+        {data &&
+          data.map((v, index) => {
+            return (
+              <div className="container" key={index}>
+                <div className="card">
+                  <div className="imgBx">
+                    <img alt="" src={v.images[0].url} />
+                  </div>
+                  <div className="contentBx">
+                    <h3>{v.name}</h3>
+                    <div className="size">
+                      <h3>{v.artists[0].name}</h3>
+                      ||<h3>{v.album_type}</h3>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </NavLink>
-            <NavLink to="/search">
-              <div className="menu-box">
-                <p>Search</p>
-              </div>
-            </NavLink>
-            <NavLink to="/myplaylist">
-              <div className="menu-box">
-                <p>My Playlist</p>
-              </div>
-            </NavLink>
-            <NavLink to="/create-playlist">
-              <div className="menu-box">
-                <p>Create Playlist</p>
-              </div>
-            </NavLink>
-            <div className="logout">
-              <NavLink to="/">
-                <p onClick={() => dispatch(removeToken())}>Log out</p>
-              </NavLink>
-            </div>
-          </div>
-          <div className="main-container">
-            <Routes>
-              {/* <Route path="/dashboard" element={<Home />} /> */}
-              <Route path="/search" element={<Search />} />
-              <Route path="/myplaylist" element={<MyPlaylist />} />
-              <Route path="/create-playlist" element={<CreatePlaylist />} />
-              <Route path="/add-song" element={<AddSong />} />
-            </Routes>
-          </div>
-        </div>
-      ) : (
-        <Auth />
-      )}
-      )
+            );
+          })}
+      </div>
     </div>
   );
 }

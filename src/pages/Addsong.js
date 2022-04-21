@@ -51,14 +51,6 @@ function AddSong() {
       })
       .finally(() => setSelected([]));
     console.log(selectedPost);
-
-    // fetch(
-    //   `https://api.spotify.com/v1/playlists/${location.state.data}/tracks?uris=${selected}`,
-    //   requestOptions
-    // )
-    //   .then((response) => response.text())
-    //   .then((result) => console.log(result))
-    //   .catch((error) => console.log("error", error));
   };
 
   const getTracks = async (e) => {
@@ -78,7 +70,7 @@ function AddSong() {
 
   return (
     <div className="kotak">
-      <div className="search">
+      <div className="search-add">
         <form onSubmit={getTracks}>
           <input
             type="text"
@@ -88,16 +80,16 @@ function AddSong() {
           <button className="submit" type="submit">
             Search
           </button>
+          <button className="selected" onClick={addItems}>
+            Add Selected Items to Playlist
+          </button>
         </form>
-        <button className="selected" onClick={addItems}>
-          Add Selected Items to Playlist
-        </button>
       </div>
       {selected &&
         selected.map((v, index) => {
           return (
             <div className="container" key={index}>
-              <div className="box">
+              <div className="item">
                 <div className="playing">
                   <img className="logo" alt="" src={v.album.images[0].url} />
                   <div className="list">
@@ -106,14 +98,6 @@ function AddSong() {
                     <p>{v.artists[0].name}</p>
                   </div>
                   <div className="btn">
-                    <button className="btn1">
-                      <img
-                        src="play.logo.png"
-                        height="20px"
-                        width="30px"
-                        alt="play"
-                      />
-                    </button>
                     <div>
                       {selected.includes(v) ? (
                         <button
@@ -145,7 +129,7 @@ function AddSong() {
           .map((v, index) => {
             return (
               <div className="container" key={index}>
-                <div className="box">
+                <div className="item">
                   <div className="playing">
                     <img className="logo" alt="" src={v.album.images[0].url} />
                     <div className="list">
@@ -154,14 +138,6 @@ function AddSong() {
                       <p>{v.artists[0].name}</p>
                     </div>
                     <div className="btn">
-                      <button className="btn1">
-                        <img
-                          src="play.logo.png"
-                          height="20px"
-                          width="30px"
-                          alt="play"
-                        />
-                      </button>
                       <div>
                         {selected.includes(v.uri) ? (
                           <button

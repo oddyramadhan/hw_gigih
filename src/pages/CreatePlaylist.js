@@ -69,11 +69,9 @@ function CreatePlaylist() {
               placeholder="Playlist title"
               onChange={(e) => setTitle(e.target.value)}
             />{" "}
-            {errortitle.required && <p>Title is required</p>}
             {errortitle.minlength && (
-              <p>Title must be at-least 10 characters</p>
+              <p className="required">Title must be at-least 10 characters</p>
             )}
-            <br></br>
             <input
               type="text"
               value={desc}
