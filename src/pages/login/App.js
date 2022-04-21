@@ -5,9 +5,9 @@ import { setToken } from "../reducers/Slicer";
 
 const CLIENT_ID = "d8aaffad66dc46989595aa50b3414ea2"; // insert your client id here from spotify
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = process.env.URL;
+const REDIRECT_URL_AFTER_LOGIN = process.env.REACT_APP_URL;
 const SCOPES = "playlist-modify-private";
-
+console.log(process.env.REACT_APP_URL);
 const Auth = () => {
   const dispatch = useDispatch();
 
