@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./CreatePlaylist.css";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 function CreatePlaylist() {
   const token = useSelector((state) => state.token.token);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const location = useLocation();
+  const userID = location.search.split("=")[1];
   const [errortitle, setErrortitle] = useState({
     required: false,
     minlength: false,
@@ -42,7 +45,7 @@ function CreatePlaylist() {
     };
 
     fetch(
-      "https://api.spotify.com/v1/users/oddy.ramadhan-id/playlists",
+      `https://api.spotify.com/v1/users/${userID}/playlists`,
       requestOptions
     )
       .then((response) => response.text())
@@ -64,6 +67,7 @@ function CreatePlaylist() {
           <h1>Create Playlist</h1>
           <form onSubmit={handleSubmit}>
             <input
+              minlength={10}
               type="text"
               value={title}
               placeholder="Playlist title"

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { RootState } from "../pages/reducers/store";
+import { RootState } from "../reducers/store";
 
 interface IRes {
   track: {

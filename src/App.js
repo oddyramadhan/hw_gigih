@@ -1,12 +1,19 @@
+import { useSelector } from "react-redux";
 import "./App.css";
-import { Provider } from "react-redux";
-// import { setToken } from "./pages/reducers/Slicer";
-import Home from "./pages/Dashboard";
-import store from "./pages/reducers/store";
+import Auth from "./login/App";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  <Provider store={store}>
-    <Home />
-  </Provider>;
+  const token = useSelector((state) => state.token.token);
+  const validToken = () => {
+    if (token) {
+      return true;
+    }
+  };
+
+  return (
+    <div className="wrapper">{validToken() ? <Dashboard /> : <Auth />})</div>
+  );
 }
+
 export default App;

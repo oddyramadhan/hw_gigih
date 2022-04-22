@@ -1,7 +1,7 @@
 import "./Cart.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../pages/reducers/store";
+import { RootState } from "../reducers/store";
 
 type IData = {
   album: {

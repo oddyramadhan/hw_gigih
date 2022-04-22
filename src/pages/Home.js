@@ -1,12 +1,12 @@
 import "../components/Cart.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeToken } from "./reducers/Slicer";
+// import { removeToken } from "./reducers/Slicer";
 
 function Home() {
   const token = useSelector((state) => state.token.token);
   const [data, setData] = useState([]);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     const getRecom = async () => {
